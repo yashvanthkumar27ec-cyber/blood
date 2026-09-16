@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sign Up</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .container {
+            width: 350px;
+            margin: auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            margin-top: 20px;
+            padding: 10px 25px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #1e7e34;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2>Sign Up</h2>
+
+        <form action="/signup" method="post">
+
+            <label for="studentname">
+                Student Name:
+            </label>
+
+            <input
+                type="text"
+                id="studentname"
+                name="studentname"
+                required
+            >
+
+            <label for="password">
+                Password:
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                name="password"
+                required
+            >
+
+            <label for="course">
+                Course:
+            </label>
+
+            <input
+                type="text"
+                id="course"
+                name="course"
+                required
+            >
+
+            <label for="fee">
+                Fee:
+            </label>
+
+            <input
+                type="number"
+                id="fee"
+                name="fee"
+                required
+            >
+
+            <input type="submit" value="Sign Up">
+
+        </form>
+
+    </div>
+
+</body>
+</html>
