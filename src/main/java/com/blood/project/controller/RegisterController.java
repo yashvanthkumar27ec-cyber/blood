@@ -1,26 +1,30 @@
 package com.blood.project.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.blood.project.domain.Student;
 import com.blood.project.repository.StudentRepository;
 
 @Controller
+@RequestMapping("/signup")
 public class RegisterController {
 
-    @Autowired
-    StudentRepository repo;
+    private final StudentRepository repo;
 
-    @GetMapping("/signup")
-    public String DisplaySignup() {
+    public RegisterController(StudentRepository repo) {
+        this.repo = repo;
+    }
+
+    @GetMapping
+    public String displaySignup() {
         return "register.html";
     }
 
-    @PostMapping("/signup")
+    @PostMapping
     public String signup(@ModelAttribute Student student) {
         repo.save(student);
         return "redirect:/index.html";
