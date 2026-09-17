@@ -1,68 +1,285 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Course Registration System</title>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Emergency Blood Donor Coordination System</title>
 
     <style>
-        body {
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
             font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 150px;
-            background-color: #f4f6f8;
         }
 
-        h1 {
+        body {
+            background-color: #f7f7f7;
             color: #333;
         }
 
-        p {
-            color: #666;
-            font-size: 18px;
+        /* Navigation Bar */
+
+        nav {
+            background-color: #b71c1c;
+            padding: 18px 50px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .button {
-            display: inline-block;
-            padding: 12px 25px;
-            margin: 15px;
-            text-decoration: none;
+        .logo {
             color: white;
-            background-color: #007bff;
-            border-radius: 5px;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 9px 18px;
+            border: 1px solid white;
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover {
+            background-color: white;
+            color: #b71c1c;
+        }
+
+        /* Main Section */
+
+        .main {
+            min-height: 500px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .content {
+            max-width: 750px;
+        }
+
+        .content h1 {
+            color: #b71c1c;
+            font-size: 38px;
+            margin-bottom: 20px;
+        }
+
+        .content p {
+            font-size: 17px;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        /* Buttons */
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .buttons a {
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 4px;
             font-size: 16px;
         }
 
-        .button:hover {
-            background-color: #0056b3;
+        .signup {
+            background-color: #b71c1c;
+            color: white;
         }
 
-        .signup {
-            background-color: #28a745;
+        .signin {
+            background-color: white;
+            color: #b71c1c;
+            border: 1px solid #b71c1c;
         }
 
         .signup:hover {
-            background-color: #1e7e34;
+            background-color: #8e0000;
         }
+
+        .signin:hover {
+            background-color: #b71c1c;
+            color: white;
+        }
+
+        /* About Section */
+
+        .about {
+            background-color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .about h2 {
+            color: #b71c1c;
+            margin-bottom: 15px;
+        }
+
+        .about p {
+            max-width: 700px;
+            margin: auto;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Footer */
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 700px) {
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 20px;
+            }
+
+            .logo {
+                text-align: center;
+                font-size: 18px;
+            }
+
+            .content h1 {
+                font-size: 30px;
+            }
+
+            .content p {
+                font-size: 15px;
+            }
+
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .buttons a {
+                width: 180px;
+            }
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
-    <h1>Course Registration System</h1>
 
-    <p>
-        Welcome! Please sign up or sign in to register for courses.
-    </p>
+    <!-- Navigation -->
 
-    <a href="/signup" class="button signup">
-        Sign Up
-    </a>
+    <nav>
 
-    <a href="/signin" class="button">
-        Sign In
-    </a>
+        <div class="logo">
+            Emergency Blood Donor Coordination System
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/signin">
+                Sign In
+            </a>
+
+            <a href="/register.html">
+                Sign Up
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Main Content -->
+
+    <section class="main">
+
+        <div class="content">
+
+            <h1>
+                Emergency Blood Donor Coordination System
+            </h1>
+
+            <p>
+                This system helps coordinate blood donors and
+                blood requirements during emergency situations.
+                Users can register as blood donors and sign in
+                to access the system.
+            </p>
+
+            <div class="buttons">
+
+                <a href="/register.html" class="signup">
+                    Register as Donor
+                </a>
+
+                <a href="/signin" class="signin">
+                    Sign In
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- About Section -->
+
+    <section class="about">
+
+        <h2>
+            About the System
+        </h2>
+
+        <p>
+            The Emergency Blood Donor Coordination System is
+            designed to provide a simple platform for maintaining
+            donor information and coordinating blood requirements.
+            Registered donors can provide their blood group,
+            contact information and location for easier coordination.
+        </p>
+
+    </section>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        Emergency Blood Donor Coordination System
+
+    </footer>
+
 
 </body>
+
 </html>

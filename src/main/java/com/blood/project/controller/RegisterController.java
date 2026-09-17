@@ -6,16 +6,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.blood.project.domain.Student;
-import com.blood.project.repository.StudentRepository;
+import com.blood.project.domain.Donor;
+import com.blood.project.repository.DonorRepository;
 
 @Controller
 @RequestMapping("/signup")
 public class RegisterController {
 
-    private final StudentRepository repo;
+    private final DonorRepository repo;
 
-    public RegisterController(StudentRepository repo) {
+    public RegisterController(DonorRepository repo) {
         this.repo = repo;
     }
 
@@ -25,8 +25,9 @@ public class RegisterController {
     }
 
     @PostMapping
-    public String signup(@ModelAttribute Student student) {
-        repo.save(student);
-        return "redirect:/index.html";
+    public String signup(@ModelAttribute Donor donor) {
+        donor.setAvailable(true);
+        repo.save(donor);
+        return "redirect:/login.html";
     }
 }

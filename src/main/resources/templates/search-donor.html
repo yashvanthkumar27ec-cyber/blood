@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Find Blood Donors</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: #b71c1c;
+            color: white;
+
+            padding: 18px 40px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            font-size: 20px;
+        }
+
+        .back-btn {
+            color: white;
+            text-decoration: none;
+
+            padding: 9px 18px;
+
+            border: 1px solid white;
+            border-radius: 4px;
+        }
+
+        .back-btn:hover {
+            background-color: white;
+            color: #b71c1c;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+
+            margin: 40px auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #b71c1c;
+
+            margin-bottom: 25px;
+        }
+
+        .search-box {
+            background-color: white;
+
+            padding: 25px;
+
+            border: 1px solid #ddd;
+            border-radius: 5px;
+
+            margin-bottom: 30px;
+        }
+
+        .form-row {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr auto;
+
+            gap: 15px;
+
+            align-items: end;
+        }
+
+        label {
+            display: block;
+
+            font-weight: bold;
+
+            margin-bottom: 6px;
+        }
+
+        input,
+        select {
+            width: 100%;
+
+            padding: 11px;
+
+            border: 1px solid #ccc;
+            border-radius: 4px;
+
+            font-size: 14px;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #b71c1c;
+        }
+
+        .search-btn {
+            background-color: #b71c1c;
+            color: white;
+
+            border: none;
+            border-radius: 4px;
+
+            padding: 11px 22px;
+
+            font-size: 15px;
+
+            cursor: pointer;
+        }
+
+        .search-btn:hover {
+            background-color: #8e0000;
+        }
+
+        .results-title {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .donor-card {
+            background-color: white;
+
+            padding: 22px;
+
+            margin-bottom: 18px;
+
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .donor-header {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
+
+            border-bottom: 1px solid #ddd;
+
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+        }
+
+        .donor-name {
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .blood-group {
+            color: #b71c1c;
+
+            padding: 7px 12px;
+
+            border: 1px solid #ffcdd2;
+
+            background-color: #ffebee;
+
+            font-weight: bold;
+        }
+
+        .details {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 12px;
+        }
+
+        .detail {
+            padding: 7px;
+        }
+
+        .label-small {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .available {
+            margin-top: 15px;
+
+            padding: 10px;
+
+            background-color: #e8f5e9;
+            color: #2e7d32;
+
+            border: 1px solid #c8e6c9;
+
+            font-weight: bold;
+        }
+
+        .no-results {
+            background-color: white;
+
+            text-align: center;
+
+            padding: 40px;
+
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .no-results h2 {
+            margin-bottom: 10px;
+        }
+
+        .no-results p {
+            color: #666;
+        }
+
+        @media (max-width: 700px) {
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .details {
+                grid-template-columns: 1fr;
+            }
+
+            .donor-header {
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 10px;
+            }
+
+            .navbar {
+                padding: 15px 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="navbar">
+
+        <h2>
+            Emergency Blood Coordination
+        </h2>
+
+        <a href="/dashboard.html"
+           class="back-btn">
+
+            Back to Dashboard
+
+        </a>
+
+    </div>
+
+
+    <div class="container">
+
+
+        <h1>
+            Find Blood Donors
+        </h1>
+
+
+        <!-- Search Form -->
+
+        <div class="search-box">
+
+            <form action="/search-donor" method="get">
+
+                <div class="form-row">
+
+
+                    <div>
+
+                        <label for="bloodGroup">
+                            Blood Group
+                        </label>
+
+                        <select
+                            id="bloodGroup"
+                            name="bloodGroup"
+                            required
+                        >
+
+                            <option value="">
+                                Select Blood Group
+                            </option>
+
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div>
+
+                        <label for="city">
+                            City
+                        </label>
+
+                        <input
+                            type="text"
+                            id="city"
+                            name="city"
+                            placeholder="Enter city"
+                            required
+                        >
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="search-btn"
+                    >
+                        Search Donors
+                    </button>
+
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <!-- Search Results -->
+
+        <div th:if="${donors != null}">
+
+
+            <h2 class="results-title">
+                Available Donors
+            </h2>
+
+
+            <!-- No Results -->
+
+            <div
+                th:if="${#lists.isEmpty(donors)}"
+                class="no-results"
+            >
+
+                <h2>
+                    No Donors Found
+                </h2>
+
+                <p>
+                    No available donors were found for the
+                    selected blood group and city.
+                </p>
+
+            </div>
+
+
+            <!-- Donor Results -->
+
+            <div
+                th:each="donor : ${donors}"
+                class="donor-card"
+            >
+
+
+                <div class="donor-header">
+
+
+                    <div
+                        class="donor-name"
+                        th:text="${donor.name}"
+                    >
+                        Donor Name
+                    </div>
+
+
+                    <div
+                        class="blood-group"
+                        th:text="${donor.bloodGroup}"
+                    >
+                        O+
+                    </div>
+
+
+                </div>
+
+
+                <div class="details">
+
+
+                    <div class="detail">
+
+                        <span class="label-small">
+                            Phone:
+                        </span>
+
+                        <span th:text="${donor.phone}">
+                            9876543210
+                        </span>
+
+                    </div>
+
+
+                    <div class="detail">
+
+                        <span class="label-small">
+                            Email:
+                        </span>
+
+                        <span th:text="${donor.email}">
+                            donor@email.com
+                        </span>
+
+                    </div>
+
+
+                    <div class="detail">
+
+                        <span class="label-small">
+                            Age:
+                        </span>
+
+                        <span th:text="${donor.age}">
+                            25
+                        </span>
+
+                    </div>
+
+
+                    <div class="detail">
+
+                        <span class="label-small">
+                            Gender:
+                        </span>
+
+                        <span th:text="${donor.gender}">
+                            Male
+                        </span>
+
+                    </div>
+
+
+                    <div class="detail">
+
+                        <span class="label-small">
+                            City:
+                        </span>
+
+                        <span th:text="${donor.city}">
+                            Chennai
+                        </span>
+
+                    </div>
+
+
+                    <div class="detail">
+
+                        <span class="label-small">
+                            Last Donation:
+                        </span>
+
+                        <span th:text="${donor.lastDonationDate}">
+                            2026-01-01
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="available">
+                    Available for Blood Donation
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>
